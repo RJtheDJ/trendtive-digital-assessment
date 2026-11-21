@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CreateRequestForm } from "@/components/CreateRequestForms";
+import { CreateRequestForm } from "@/components/CreateRequestForm";
 
 export default function NewRequestPage() {
   return (
