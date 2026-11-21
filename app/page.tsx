@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Filters } from "@/components/Filters";
 import { RequestList } from "@/components/RequestList";
 import { PRIORITIES, STATUSES, type ListQuery } from "@/lib/types";
+import Link from "next/dist/client/link";
 
 type SearchParams = Awaited<PageProps<"/">["searchParams"]>;
 
@@ -37,7 +38,12 @@ async function Results({ searchParams }: { searchParams: PageProps<"/">["searchP
 export default function Home({ searchParams }: PageProps<"/">) {
   return (
     <main className="mx-auto w-full max-w-5xl space-y-6 p-4 sm:p-8">
-      <h1 className="text-2xl font-semibold">Service requests</h1>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <h1 className="text-2xl font-semibold">Service requests</h1>
+        <Link href="/requests/new" className="rounded-md bg-zinc-900 px-4 py-2 text-sm text-white">
+          New request
+        </Link>
+      </div>
       <Suspense fallback={<div className="h-16" />}>
         <Filters />
       </Suspense>
