@@ -1,4 +1,4 @@
-import { PRIORITIES } from "./types";
+import { PRIORITIES, type Priority, type Status } from "./types";
 
 export const TITLE_MAX = 100;
 export const DESCRIPTION_MAX = 1000;
@@ -18,4 +18,15 @@ export function validateRequest(input: { title: string; description: string; pri
   if (!PRIORITIES.some((p) => p === input.priority)) errors.priority = "Choose a priority.";
 
   return errors;
+}
+
+//OPEN -> IN_PROGRESS -> DONE (null = no next step).
+export const NEXT_STATUS: Record<Status, Status | null> = {
+  OPEN: "IN_PROGRESS",
+  IN_PROGRESS: "DONE",
+  DONE: null,
+};
+
+export function needsResolutionNote(priority: Priority, nextStatus: Status) {
+  return priority === "HIGH" && nextStatus === "DONE";
 }
