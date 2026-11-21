@@ -1,5 +1,8 @@
-export type Status = "OPEN" | "IN_PROGRESS" | "DONE";
-export type Priority = "LOW" | "MEDIUM" | "HIGH";
+export const STATUSES = ["OPEN", "IN_PROGRESS", "DONE"] as const;
+export const PRIORITIES = ["LOW", "MEDIUM", "HIGH"] as const;
+
+export type Status = (typeof STATUSES)[number];
+export type Priority = (typeof PRIORITIES)[number];
 
 export interface StatusHistoryItem{
     id: number;
@@ -36,4 +39,11 @@ export interface ApiError {
   error: string;   
   message: string; 
   status: number;
+}
+
+// What the List page reads
+export interface ListQuery {
+  status?: Status;
+  priority?: Priority;
+  page: number;
 }
